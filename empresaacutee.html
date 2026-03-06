@@ -1,0 +1,341 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Ashley’s Sweet Cookies</title>
+
+<style>
+body{
+  margin:0;
+  font-family:'Segoe UI',sans-serif;
+  background:#ffd9f2;
+  color:#b03060;
+}
+
+header{
+  background:#ffb6e6;
+  text-align:center;
+  padding:20px;
+}
+
+nav button{
+  background:white;
+  border:none;
+  padding:10px 15px;
+  margin:5px;
+  border-radius:20px;
+  cursor:pointer;
+  font-weight:bold;
+  color:#ff1493;
+}
+
+nav button:hover{
+  background:#ff69b4;
+  color:white;
+}
+
+section{
+  padding:40px 20px;
+  max-width:1100px;
+  margin:auto;
+}
+
+.products{
+  display:grid;
+  grid-template-columns:repeat(auto-fit,minmax(250px,1fr));
+  gap:20px;
+}
+
+.card{
+  background:white;
+  padding:15px;
+  border-radius:20px;
+  box-shadow:0 8px 20px rgba(0,0,0,0.1);
+}
+
+.card img{
+  width:100%;
+  height:180px;
+  object-fit:cover;
+  border-radius:15px;
+}
+
+button{
+  background:#ff69b4;
+  border:none;
+  padding:8px 12px;
+  border-radius:15px;
+  color:white;
+  cursor:pointer;
+  margin-top:5px;
+}
+
+button:hover{
+  background:#ff1493;
+}
+
+.cart{
+  background:white;
+  padding:20px;
+  border-radius:20px;
+  margin-top:30px;
+}
+
+.review{
+  background:white;
+  padding:10px;
+  border-radius:10px;
+  margin-top:10px;
+}
+
+footer{
+  background:#ffb6e6;
+  text-align:center;
+  padding:20px;
+}
+
+.stars span{
+  font-size:25px;
+  cursor:pointer;
+  color:#ccc;
+}
+
+.stars .active{
+  color:gold;
+}
+</style>
+</head>
+
+<body>
+
+<header>
+<h1>🎀 Ashley’s Sweet Cookies 🍰</h1>
+<nav>
+<button onclick="go('tienda')">Mi Tienda</button>
+<button onclick="go('sweetstudio')">SweetStudio</button>
+<button onclick="go('resenas')">Reseñas</button>
+<button onclick="go('contacto')">Contacto</button>
+</nav>
+</header>
+
+<section id="tienda">
+<h2>🛍 Mi Tienda</h2>
+
+<div class="products">
+
+<!-- cupcake  -->
+<div class="card">
+<img src="https://images.unsplash.com/photo-1599785209707-a456fc1337bb">
+<h3>cupcakel</h3>
+<p>$1.50</p>
+
+<strong>Extras (+$0.25)</strong><br>
+<label><input type="checkbox" value="0.25"> Chispas de colores </label>
+<label><input type="checkbox" value="0.25"> chispas de Vainilla</label>
+<label><input type="checkbox" value="0.25"> chispas de chocolate </label>
+<label><input type="checkbox" value="0.25"> Frutas</label>
+<label><input type="checkbox" value="0.25"> Nutella</label>
+<label><input type="checkbox" value="0.25"> oreo</label>
+<label><input type="checkbox" value="0.25"> coco</label>
+
+
+<button onclick="addToCart(this,3)">Agregar</button>
+</div>
+
+<!-- porcion de pastel -->
+<div class="card">
+<img src="https://images.unsplash.com/photo-1588195538326-c5b1e9f80a1b">
+<h3>porcion de pastel</h3>
+<p>$2.50</p>
+
+<strong>Extras (+$0.25)</strong><br>
+<label><input type="checkbox" value="0.25"> Chispas de colores </label>
+<label><input type="checkbox" value="0.25"> chispas de Vainilla</label>
+<label><input type="checkbox" value="0.25"> chispas de chocolate </label>
+<label><input type="checkbox" value="0.25"> Frutas</label>
+<label><input type="checkbox" value="0.25"> Nutella</label>
+<label><input type="checkbox" value="0.25"> oreo</label>
+<label><input type="checkbox" value="0.25"> coco</label>
+
+<button onclick="addToCart(this,1.5)">Agregar</button>
+</div>
+
+<!-- ROLES -->
+<div class="card">
+<img src="https://images.unsplash.com/photo-1604908176997-4318c2b8b6f1">
+<h3>Roles de Canela</h3>
+<p>$1.00</p>
+
+<strong>Extras (+$0.25)</strong><br>
+<label><input type="checkbox" value="0.25"> Chispas</label>
+<label><input type="checkbox" value="0.25"> Nutella</label>
+
+<button onclick="addToCart(this,1)">Agregar</button>
+</div>
+
+<!-- frappe -->
+<div class="card">
+<img src="https://images.unsplash.com/photo-1563805042-7684c019e1cb">
+<h3>frappe</h3>
+<p>$0.50</p>
+
+<strong>Extras (+$0.25)</strong><br>
+<label><input type="checkbox" value="0.25"> Chispas de colores </label>
+<label><input type="checkbox" value="0.25"> chispas de Vainilla</label>
+<label><input type="checkbox" value="0.25"> chispas de chocolate </label>
+<label><input type="checkbox" value="0.25"> Frutas</label>
+<label><input type="checkbox" value="0.25"> Nutella</label>
+<label><input type="checkbox" value="0.25"> oreo</label>
+<label><input type="checkbox" value="0.25"> coco</label>
+
+<button onclick="addToCart(this,0.5)">Agregar</button>
+</div>
+
+</div>
+
+<div class="cart">
+<h3>🛒 Carrito</h3>
+<ul id="cartItems"></ul>
+<p><strong>Total:</strong> $<span id="total">0.00</span></p>
+
+<input type="text" id="discountCode" placeholder="Código de descuento">
+<button onclick="applyDiscount()">Aplicar</button>
+
+<h4>💳 Pago con tarjeta</h4>
+<input placeholder="Nombre en tarjeta">
+<input placeholder="Número de tarjeta">
+<input placeholder="MM/AA">
+<input placeholder="CVV">
+<button onclick="pagar()">Pagar</button>
+</div>
+</section>
+
+<section id="sweetstudio">
+<h2>🎀 SweetStudio</h2>
+<p><strong>Visión:</strong> Ser una página web de postres con productos 100% naturales reconocida por dar cariño y comprensión a nuestros clientes.</p>
+<p><strong>Misión:</strong> Crear productos adorables y deliciosos que brinden felicidad a cada cliente.</p>
+<p><strong>Objetivo:</strong> Ofrecer productos de calidad.</p>
+</section>
+</div>
+
+<div class="note">
+<section id="sweetstudio">
+<h2>🎀 💌 Al pedir nuestros postres puedes escribirnos a WhatsApp 💐✨  </h2>
+<a class="whatsapp-btn" target="_blank"
+href="https://wa.me/593967764465?text=Hola%20vengo%20desde%20la%20web%20de%20Ashley’s%20Sweet%20Cookies%20💐%20y%20me%20gustaría%20hacer%20un%20pedido.%20¿Podrían%20ayudarme%20por%20favor?%20🌷">
+🌸 Pedir por WhatsApp 🌸
+</a>
+</div>  
+<section id="resenas">
+<h2>⭐ Reseñas</h2>
+
+<div class="stars" id="stars">
+<span onclick="rate(1)">★</span>
+<span onclick="rate(2)">★</span>
+<span onclick="rate(3)">★</span>
+<span onclick="rate(4)">★</span>
+<span onclick="rate(5)">★</span>
+</div>
+
+<textarea id="comentario" placeholder="Escribe tu reseña 💖"></textarea>
+<button onclick="addReview()">Enviar</button>
+
+<div id="reviews"></div>
+</section>
+
+<section id="contacto">
+<h2>📱 Contacto</h2>
+<p>TikTok: @ashleys_swwet_cookies</p>
+<p><a href="https://wa.me/593967764465" target="_blank">WhatsApp</a></p>
+</section>
+
+<footer>
+© 2026 Ashley’s Sweet Cookies 🎀
+</footer>
+
+<script>
+let total=0;
+let discountUsed=false;
+let rating=0;
+
+function go(id){
+document.getElementById(id).scrollIntoView({behavior:'smooth'});
+}
+
+function addToCart(btn,basePrice){
+let card=btn.parentElement;
+let extras=card.querySelectorAll("input:checked");
+let extraTotal=0;
+extras.forEach(e=>extraTotal+=parseFloat(e.value));
+
+let finalPrice=basePrice+extraTotal;
+total+=finalPrice;
+
+let li=document.createElement("li");
+li.textContent=card.querySelector("h3").textContent+" - $"+finalPrice.toFixed(2);
+
+let remove=document.createElement("button");
+remove.textContent="X";
+remove.onclick=function(){
+total-=finalPrice;
+li.remove();
+updateTotal();
+}
+li.appendChild(remove);
+
+document.getElementById("cartItems").appendChild(li);
+extras.forEach(e=>e.checked=false);
+updateTotal();
+}
+
+function updateTotal(){
+document.getElementById("total").textContent=total.toFixed(2);
+}
+
+function applyDiscount(){
+let code=document.getElementById("discountCode").value;
+if(code==="mocchisweet18" && !discountUsed){
+total=total*0.85;
+discountUsed=true;
+alert("Descuento aplicado 🎀 (-15%)");
+updateTotal();
+}else{
+alert("Código inválido o ya usado 💔");
+}
+}
+
+function pagar(){
+if(total<=0){
+alert("Tu carrito está vacío 🛒");
+}else{
+alert("Pago realizado con éxito 💖✨");
+total=0;
+discountUsed=false;
+updateTotal();
+document.getElementById("cartItems").innerHTML="";
+}
+}
+
+function rate(stars){
+rating=stars;
+let all=document.querySelectorAll("#stars span");
+all.forEach((s,i)=>s.classList.toggle("active",i<stars));
+}
+
+function addReview(){
+let text=document.getElementById("comentario").value;
+if(text===""||rating===0){
+alert("Califica y escribe una reseña 💖");
+return;
+}
+let div=document.createElement("div");
+div.className="review";
+div.innerHTML="<strong>"+("⭐".repeat(rating))+"</strong><p>"+text+"</p>";
+document.getElementById("reviews").appendChild(div);
+document.getElementById("comentario").value="";
+}
+</script>
+
+</body>
+</html>
